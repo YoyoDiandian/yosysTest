@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b53940c7-aaa9-4088-8785-e1c4f7ca72fb}</ProjectGuid>
+    <RootNamespace>yosys</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\..\..\;$(IncludePath)</IncludePath>
+    <SourcePath>..\..\..\passes\techmap;..\..\..\passes\sat;..\..\..\passes\proc;..\..\..\passes\pmgen;..\..\..\passes\opt;..\..\..\passes\memory;..\..\..\passes\hierarchy;..\..\..\passes\fsm;..\..\..\passes\equiv;..\..\..\passes\cmds;..\..\..\techlibs\pango;..\..\..\kernel;$(SourcePath)</SourcePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
+    <OutDir>$(SolutionDir)..\..\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>..\..\..\passes\techmap;..\..\..\passes\sat;..\..\..\passes\proc;..\..\..\passes\pmgen;..\..\..\passes\opt;..\..\..\passes\memory;..\..\..\passes\hierarchy;..\..\..\passes\fsm;..\..\..\passes\equiv;..\..\..\passes\cmds;..\..\..\techlibs\pango;..\..\..\kernel;$(VC_SourcePath);</SourcePath>
+    <IncludePath>..\..\..\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <SourcePath>..\..\..\passes\techmap;..\..\..\passes\sat;..\..\..\passes\proc;..\..\..\passes\pmgen;..\..\..\passes\opt;..\..\..\passes\memory;..\..\..\passes\hierarchy;..\..\..\passes\fsm;..\..\..\passes\equiv;..\..\..\passes\cmds;..\..\..\techlibs\pango;..\..\..\kernel;$(VC_SourcePath);</SourcePath>
+    <IncludePath>..\..\..\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>..\..\..\passes\techmap;..\..\..\passes\sat;..\..\..\passes\proc;..\..\..\passes\pmgen;..\..\..\passes\opt;..\..\..\passes\memory;..\..\..\passes\hierarchy;..\..\..\passes\fsm;..\..\..\passes\equiv;..\..\..\passes\cmds;..\..\..\techlibs\pango;..\..\..\kernel;$(VC_SourcePath);</SourcePath>
+    <IncludePath>..\..\..\;..\..\..\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_YOSYS_;_CRT_SECURE_NO_WARNINGS;NDEBUG;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_YOSYS_;_CRT_SECURE_NO_WARNINGS;NDEBUG;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_YOSYS_;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_YOSYS_;_CRT_SECURE_NO_WARNINGS;NDEBUG;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\backends\rtlil\rtlil_backend.cc" />
+    <ClCompile Include="..\..\..\backends\verilog\verilog_backend.cc" />
+    <ClCompile Include="..\..\..\frontends\ast\ast.cc" />
+    <ClCompile Include="..\..\..\frontends\ast\ast_binding.cc" />
+    <ClCompile Include="..\..\..\frontends\ast\dpicall.cc" />
+    <ClCompile Include="..\..\..\frontends\ast\genrtlil.cc" />
+    <ClCompile Include="..\..\..\frontends\ast\simplify.cc" />
+    <ClCompile Include="..\..\..\frontends\rtlil\rtlil_frontend.cc" />
+    <ClCompile Include="..\..\..\frontends\rtlil\rtlil_lexer.cc" />
+    <ClCompile Include="..\..\..\frontends\rtlil\rtlil_parser.tab.cc" />
+    <ClCompile Include="..\..\..\frontends\verilog\const2ast.cc" />
+    <ClCompile Include="..\..\..\frontends\verilog\preproc.cc" />
+    <ClCompile Include="..\..\..\frontends\verilog\verilog_frontend.cc" />
+    <ClCompile Include="..\..\..\frontends\verilog\verilog_lexer.cc" />
+    <ClCompile Include="..\..\..\frontends\verilog\verilog_parser.tab.cc" />
+    <ClCompile Include="..\..\..\kernel\binding.cc" />
+    <ClCompile Include="..\..\..\kernel\calc.cc" />
+    <ClCompile Include="..\..\..\kernel\cellaigs.cc" />
+    <ClCompile Include="..\..\..\kernel\celledges.cc" />
+    <ClCompile Include="..\..\..\kernel\cost.cc" />
+    <ClCompile Include="..\..\..\kernel\driver.cc" />
+    <ClCompile Include="..\..\..\kernel\drivertools.cc" />
+    <ClCompile Include="..\..\..\kernel\ff.cc" />
+    <ClCompile Include="..\..\..\kernel\ffmerge.cc" />
+    <ClCompile Include="..\..\..\kernel\fmt.cc" />
+    <ClCompile Include="..\..\..\kernel\functional.cc" />
+    <ClCompile Include="..\..\..\kernel\gzip.cc" />
+    <ClCompile Include="..\..\..\kernel\io.cc" />
+    <ClCompile Include="..\..\..\kernel\json.cc" />
+    <ClCompile Include="..\..\..\kernel\log.cc" />
+    <ClCompile Include="..\..\..\kernel\mem.cc" />
+    <ClCompile Include="..\..\..\kernel\qcsat.cc" />
+    <ClCompile Include="..\..\..\kernel\register.cc" />
+    <ClCompile Include="..\..\..\kernel\rtlil.cc" />
+    <ClCompile Include="..\..\..\kernel\satgen.cc" />
+    <ClCompile Include="..\..\..\kernel\scopeinfo.cc" />
+    <ClCompile Include="..\..\..\kernel\sexpr.cc" />
+    <ClCompile Include="..\..\..\kernel\tclapi.cc" />
+    <ClCompile Include="..\..\..\kernel\yosys.cc" />
+    <ClCompile Include="..\..\..\kernel\yw.cc" />
+    <ClCompile Include="..\..\..\libs\bigint\BigInteger.cc" />
+    <ClCompile Include="..\..\..\libs\bigint\BigIntegerAlgorithms.cc" />
+    <ClCompile Include="..\..\..\libs\bigint\BigIntegerUtils.cc" />
+    <ClCompile Include="..\..\..\libs\bigint\BigUnsigned.cc" />
+    <ClCompile Include="..\..\..\libs\bigint\BigUnsignedInABase.cc" />
+    <ClCompile Include="..\..\..\libs\ezsat\ezminisat.cc" />
+    <ClCompile Include="..\..\..\libs\ezsat\ezsat.cc" />
+    <ClCompile Include="..\..\..\libs\json11\json11.cpp" />
+    <ClCompile Include="..\..\..\libs\minisat\Options.cc" />
+    <ClCompile Include="..\..\..\libs\minisat\SimpSolver.cc" />
+    <ClCompile Include="..\..\..\libs\minisat\Solver.cc" />
+    <ClCompile Include="..\..\..\libs\minisat\System.cc" />
+    <ClCompile Include="..\..\..\libs\sha1\sha1.cpp" />
+    <ClCompile Include="..\..\..\passes\cmds\abstract.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\add.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\autoname.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\blackbox.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\box_derive.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\bugpoint.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\check.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\chformal.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\chtype.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\clean_zerowidth.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\connect.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\connwrappers.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\copy.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\cover.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\delete.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\design.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\dft_tag.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\edgetypes.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\example_dt.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\exec.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\future.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\glift.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\internal_stats.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\logcmd.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\logger.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\ltp.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\plugin.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\portarcs.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\portlist.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\printattrs.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\rename.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\scatter.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\scc.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\scratchpad.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\select.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\setattr.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\setenv.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\setundef.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\show.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\splice.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\splitcells.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\splitnets.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\sta.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\tee.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\test_select.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\timeest.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\torder.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\trace.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\viz.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\wrapcell.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\write_file.cc" />
+    <ClCompile Include="..\..\..\passes\cmds\xprop.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_add.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_induct.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_make.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_mark.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_miter.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_opt.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_purge.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_remove.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_simple.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_status.cc" />
+    <ClCompile Include="..\..\..\passes\equiv\equiv_struct.cc" />
+    <ClCompile Include="..\..\..\passes\hierarchy\hierarchy.cc" />
+    <ClCompile Include="..\..\..\passes\hierarchy\keep_hierarchy.cc" />
+    <ClCompile Include="..\..\..\passes\hierarchy\submod.cc" />
+    <ClCompile Include="..\..\..\passes\hierarchy\uniquify.cc" />
+    <ClCompile Include="..\..\..\passes\opt\muxpack.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_clean.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_demorgan.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_dff.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_expr.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_ffinv.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_lut.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_lut_ins.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_mem.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_mem_feedback.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_mem_priority.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_mem_widen.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_merge.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_muxtree.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_reduce.cc" />
+    <ClCompile Include="..\..\..\passes\opt\opt_share.cc" />
+    <ClCompile Include="..\..\..\passes\opt\pmux2shiftx.cc" />
+    <ClCompile Include="..\..\..\passes\opt\rmports.cc" />
+    <ClCompile Include="..\..\..\passes\opt\share.cc" />
+    <ClCompile Include="..\..\..\passes\opt\wreduce.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\bmuxmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\bwmuxmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\cellmatch.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\clkbufmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\constmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\deminout.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\demuxmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\dffinit.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\dfflegalize.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\dffunmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\flatten.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\maccmap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\simplemap.cc" />
+    <ClCompile Include="..\..\..\passes\techmap\techmap.cc" />
+    <ClCompile Include="..\..\..\techlibs\pango\score.cc" />
+    <ClCompile Include="..\..\..\techlibs\pango\synth_pango.cc" />
+    <ClCompile Include="..\version_win.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\kernel\yosys.h" />
+    <ClInclude Include="..\..\..\kernel\yosys_common.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\frontends\verilog\verilog_lexer.l">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_flex.exe -o $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing flex Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.cc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_flex.exe -o $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing flex Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.cc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_flex.exe -o $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing flex Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.cc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\win_flex_bison-2.5.25\win_flex.exe -o $(SolutionDir)\..\..\frontends\verilog\verilog_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing flex Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\..\..\frontends\verilog\verilog_lexer.cc</Outputs>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</BuildInParallel>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</BuildInParallel>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildInParallel>
+      <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BuildInParallel>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.l</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.l</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_lexer.l</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </AdditionalInputs>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\frontends\verilog\verilog_parser.y">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_bison.exe -Wall -Werror -o $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_parser.tab.cc -d -r all -b $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_parser  %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Bison Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\frontends\verilog\verilog_parser.tab.cc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_bison.exe -Wall -Werror -o $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_parser.tab.cc -d -r all -b $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_parser  %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Bison Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\frontends\verilog\verilog_parser.tab.cc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_bison.exe -Wall -Werror -o $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_parser.tab.cc -d -r all -b $(MSBuildStartupDirectory)\..\..\frontends\verilog\verilog_parser  %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing Bison Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\frontends\verilog\verilog_parser.tab.cc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\win_flex_bison-2.5.25\win_bison.exe -Wall -Werror -o $(SolutionDir)\..\..\frontends\verilog\verilog_parser.tab.cc -d -r all -b $(SolutionDir)\..\..\frontends\verilog\verilog_parser  %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing Bison Tools</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\frontends\verilog\verilog_parser.tab.cc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\frontends\rtlil\rtlil_lexer.l">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_flex.exe -o $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_lexer.cc %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_lexer.cc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_flex.exe -o $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">generate rtlil_lexer.cc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_lexer.cc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_flex.exe -o $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">generate rtlil_lexer.cc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_lexer.cc</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">generate rtlil_lexer.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\win_flex_bison-2.5.25\win_flex.exe -o $(SolutionDir)\..\..\frontends\rtlil\rtlil_lexer.cc %(Identity)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">generate rtlil_lexer.cc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\..\..\frontends\rtlil\rtlil_lexer.cc</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\frontends\rtlil\rtlil_parser.y">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_bison.exe -o $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser.tab.cc -d -r all -b $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser  %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser.tab.cc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_bison.exe -o $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser.tab.cc -d -r all -b $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser  %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser.tab.cc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\win_flex_bison-2.5.25\win_bison.exe -o $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser.tab.cc -d -r all -b $(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser  %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\frontends\rtlil\rtlil_parser.tab.cc</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\win_flex_bison-2.5.25\win_bison.exe -o $(SolutionDir)\..\..\frontends\rtlil\rtlil_parser.tab.cc -d -r all -b $(SolutionDir)\..\..\frontends\rtlil\rtlil_parser  %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\..\..\frontends\rtlil\rtlil_parser.tab.cc</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">generate rtlil_parser.tab.cc</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">generate rtlil_parser.tab.cc</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">generate rtlil_parser.tab.cc</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">generate rtlil_parser.tab.cc</Message>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\techlibs\common\simcells.v">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">python.exe  $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">generate simcells_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">python.exe  $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">generate simcells_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">python.exe  $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">generate simcells_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">python.exe  $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">generate simcells_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simcells_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\techlibs\common\simlib.v">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">python.exe $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">generate simlib_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib.v</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">python.exe $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">generate simlib_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib.v</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">python.exe $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">generate simlib_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib.v</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">python.exe $(MSBuildStartupDirectory)\..\..\techlibs\common\cellhelp.py  %(Identity) &gt; $(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">generate simlib_help.inc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib_help.inc</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildStartupDirectory)\..\..\techlibs\common\simlib.v</AdditionalInputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\techlibs\common\cellhelp.py" />
+    <CopyFileToFolders Include="..\..\..\techlibs\pango\pango_lib.v">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</TreatOutputAsContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</TreatOutputAsContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatOutputAsContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</TreatOutputAsContent>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\..\techlibs\pango\pango_sim.v">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</TreatOutputAsContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</TreatOutputAsContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatOutputAsContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MSBuildProjectDirectory)\..\..\..\share\pango\</DestinationFolders>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</TreatOutputAsContent>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
