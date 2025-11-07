@@ -59,5 +59,6 @@ __pycache__
 /build-vs/yosys/yosys/x64
 /.vs/*
 *.pdb
-/techlibs/pango/gtp_lib - 副本.v
-/techlibs/pango/pango_lib - 副本.v
+/demo/
+/.DS_Store
+/.vscode/

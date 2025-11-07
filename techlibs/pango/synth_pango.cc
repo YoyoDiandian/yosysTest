@@ -27,13 +27,14 @@ Implement of "Heuristics for Area Minimization in LUT-Based FPGA Technology Mapp
 #include "kernel/modtools.h"
 #include "kernel/sigtools.h"
 #include "kernel/yosys.h"
+#include "techlibs/pango/pango_common.h"
 #include <queue>
 #include <ranges>
 #include <string.h>
 
 USING_YOSYS_NAMESPACE
 using namespace std;
-PRIVATE_NAMESPACE_BEGIN
+YOSYS_NAMESPACE_BEGIN
 
 // -----------------------
 // global variables delare here
@@ -75,36 +76,8 @@ float GetEstimatedFanout(SigBit bit);
 
 pool<Cell *> GetReaders(Cell *cell, RTLIL::IdString port = RTLIL::IdString());
 
-bool IsNOT(Cell *cell)
-{
-	if (cell->type != ID($not) && cell->type != ID($_NOT_))
-		return false;
-	return true;
-}
-bool IsAND(Cell *cell)
-{
-	if (cell->type != ID($and) && cell->type != ID($_AND_))
-		return false;
-	return true;
-}
-bool IsOR(Cell *cell)
-{
-	if (cell->type != ID($or) && cell->type != ID($_OR_))
-		return false;
-	return true;
-}
-bool IsXOR(Cell *cell)
-{
-	if (cell->type != ID($xor) && cell->type != ID($_XOR_))
-		return false;
-	return true;
-}
-bool IsMUX(Cell *cell)
-{
-	if (cell->type != ID($mux) && cell->type != ID($_MUX_))
-		return false;
-	return true;
-}
+// Functions implemented inline in pango_common.h:
+// - IsNOT, IsAND, IsOR, IsXOR, IsMUX, IsGTP, IsCombinationalGate
 
 int IsGTP_LUT(Cell *cell)
 {
@@ -126,8 +99,7 @@ bool IsGTP_LUT6D(Cell *cell)
 		return false;
 	return true;
 }
-bool IsGTP(Cell *cell) { return cell->type.begins_with("\\GTP_"); }
-bool IsCombinationalGate(Cell *cell) { return IsAND(cell) || IsOR(cell) || IsNOT(cell) || IsMUX(cell) || IsXOR(cell); }
+// IsGTP and IsCombinationalGate are defined inline in pango_common.h
 bool IsCombinationalCell(Cell *cell)
 {
 	return IsAND(cell) || IsOR(cell) || IsNOT(cell) || IsMUX(cell) || IsXOR(cell) || IsGTP_LUT(cell) || IsGTP_LUT6D(cell);
@@ -136,32 +108,63 @@ bool IsCombinationalCell(Cell *cell)
 // only return this first sigbit connect to cell
 SigBit GetCellOutput(Cell *cell)
 {
-	log_assert(cell && cell2bits.count(cell));
-	auto &bits = cell2bits[cell];
-	return bits[0];
+	log_assert(cell);
+	// Prefer cached mapping when available and non-empty
+	if (cell2bits.count(cell)) {
+		auto &bits = cell2bits[cell];
+		if (!bits.empty()) return bits[0];
+	}
+	// Fallback: scan connections to find an output port
+	for (auto &conn : cell->connections()) {
+		IdString portname = conn.first;
+		if (yosys_celltypes.cell_output(cell->type, portname)) {
+			RTLIL::SigSpec sig = sigmap(conn.second);
+			if (sig.size() > 0)
+				return sig[0];
+		}
+	}
+	return SigBit();
 }
 void GetCellInputsSet(Cell *cell, pool<SigBit> &inputs)
 {
-	log_assert(cell && inputs.empty() && cell2bits.count(cell));
-	auto &bits = cell2bits[cell];
-	int offset = 1;
-	// not support GTP_LUT6D now
-	// if(cell is dual output)
-	// offset=2
-	for (auto it = bits.begin() + offset; it != bits.end(); ++it) {
-		inputs.insert(*it);
+	log_assert(cell && inputs.empty());
+	if (cell2bits.count(cell)) {
+		auto &bits = cell2bits[cell];
+		int offset = 1;
+		// If a dual-output cell (like GTP_LUT6D) is encoded with two outputs first, skip both
+		if (cell->type == ID(GTP_LUT6D) && (int)bits.size() >= 2)
+			offset = 2;
+		for (auto it = bits.begin() + std::min<int>(offset, bits.size()); it != bits.end(); ++it)
+			inputs.insert(*it);
+		return;
+	}
+	// Fallback: derive inputs from connections directly
+	for (auto &conn : cell->connections()) {
+		IdString portname = conn.first;
+		if (yosys_celltypes.cell_input(cell->type, portname)) {
+			RTLIL::SigSpec sig = sigmap(conn.second);
+			for (int i = 0; i < sig.size(); i++) inputs.insert(sig[i]);
+		}
 	}
 }
 void GetCellInputsVector(Cell *cell, vector<SigBit> &inputs)
 {
-	log_assert(cell && inputs.empty() && cell2bits.count(cell));
-	auto &bits = cell2bits[cell];
-	int offset = 1;
-	// not support GTP_LUT6D now
-	// if(cell is dual output)
-	// offset=2
-	for (auto it = bits.begin() + offset; it != bits.end(); ++it) {
-		inputs.push_back(*it);
+	log_assert(cell && inputs.empty());
+	if (cell2bits.count(cell)) {
+		auto &bits = cell2bits[cell];
+		int offset = 1;
+		if (cell->type == ID(GTP_LUT6D) && (int)bits.size() >= 2)
+			offset = 2;
+		for (auto it = bits.begin() + std::min<int>(offset, bits.size()); it != bits.end(); ++it)
+			inputs.push_back(*it);
+		return;
+	}
+	for (auto &conn : cell->connections()) {
+		IdString portname = conn.first;
+		if (yosys_celltypes.cell_input(cell->type, portname)) {
+			RTLIL::SigSpec sig = sigmap(conn.second);
+			for (int i = 0; i < sig.size(); i++) inputs.push_back(sig[i]);
+		}
 	}
 }
 
@@ -188,7 +191,7 @@ bool GetPrimeInputOuput(Module *module, pool<SigBit> &inputs, pool<SigBit> &outp
 {
 	for (auto &cell_iter : module->cells_) {
 		Cell *cell = cell_iter.second;
-		if (!cell || !IsCombinationalGate(cell)) // only connsider the prime input and output connect to the combinational gate
+		if (!cell || !IsCombinationalGate(cell)) // only consider the prime input and output connect to the combinational gate
 		{
 			continue;
 		}
@@ -2740,139 +2743,4 @@ bool CheckCellWidth(Module *module)
 	return true;
 }
 
-struct MapperPass : public Pass {
-	MapperPass() : Pass("mapper", "synthesis for Pango FPGA. Mapper main function.") {}
-	void help() override
-	{
-		//   |---v---|---v---|---v---|---v---|---v---|---v---|---v---|---v---|---v---|---v---|
-		log("\n");
-		log("    mapper [options] [selection]\n");
-	}
-	bool write_out_black_list;
-	void clear_flags() override { write_out_black_list = false; }
-	void execute(std::vector<std::string> args, RTLIL::Design *design) override
-	{
-		log_header(design, "Start MapperPass\n");
-
-		size_t argidx;
-		for (argidx = 1; argidx < args.size(); argidx++) {
-			if (args[argidx] == "-ilut") {
-				using_internel_lut_type = true;
-				continue;
-			}
-			if (args[argidx] == "-interation" && argidx + 1 < args.size()) {
-				MAX_INTERATIONS = max(atoi(args[++argidx].c_str()), 3);
-				continue;
-			}
-			break;
-		}
-		extra_args(args, argidx, design);
-
-		Module *module = design->top_module();
-		if (module == nullptr)
-			log_cmd_error("No top module found.\n");
-
-		log_header(design, "Continuing MapperPass pass.\n");
-		MapperInit(module);
-		MapperMain(module);
-		log_pop();
-	}
-} MapperPass;
-
-struct SynthPangoPass : public ScriptPass {
-	SynthPangoPass() : ScriptPass("synth_pango", "synthesis script pass for Pango FPGA. Map gate to GTP_LUT.") {}
-	void help() override
-	{
-		//   |---v---|---v---|---v---|---v---|---v---|---v---|---v---|---v---|---v---|---v---|
-		log("\n");
-		log("    synth_pango [options] [selection]\n");
-	}
-
-	string input_verilog_file;
-	string output_verilog_file;
-	string top_module_name;
-	void clear_flags() override
-	{
-		using_internel_lut_type = false;
-		output_verilog_file = "";
-		top_module_name = "";
-	}
-	void execute(std::vector<std::string> args, RTLIL::Design *design) override
-	{
-		string run_from, run_to;
-		clear_flags();
-
-		size_t argidx;
-		for (argidx = 1; argidx < args.size(); argidx++) {
-			if (args[argidx] == "-top" && argidx + 1 < args.size()) {
-				top_module_name = args[++argidx];
-				continue;
-			}
-			if (args[argidx] == "-input" && argidx + 1 < args.size()) {
-				input_verilog_file = args[++argidx];
-				continue;
-			}
-			if (args[argidx] == "-interation" && argidx + 1 < args.size()) {
-				MAX_INTERATIONS = max(atoi(args[++argidx].c_str()), 3);
-				continue;
-			}
-			if (args[argidx] == "-run" && argidx + 1 < args.size()) {
-				size_t pos = args[argidx + 1].find(':');
-				if (pos == std::string::npos)
-					break;
-				run_from = args[++argidx].substr(0, pos);
-				run_to = args[argidx].substr(pos + 1);
-				continue;
-			}
-			break;
-		}
-
-		extra_args(args, argidx, design);
-		if (!design->full_selection())
-			log_cmd_error("This command only operates on fully selected designs!\n");
-
-		log_header(design, "Start synth_pango\n");
-		log_push();
-
-		run_script(design, run_from, run_to);
-
-		log_pop();
-	}
-	void script() override
-	{
-		if (check_label("begin")) {
-#if defined(_WIN32)
-			run("read_verilog -lib ./techlibs/pango/pango_lib.v");
-#else
-			run("read_verilog -lib +/pango/pango_lib.v");
-#endif
-			run(stringf("read_verilog -icells %s", input_verilog_file.c_str()));
-			if (top_module_name.size() > 0) {
-				run(stringf("hierarchy -check -top %s", top_module_name.c_str()));
-			}
-		}
-
-		Module *module = active_design->top_module();
-		if (module == nullptr)
-			log_cmd_error("No top module found.\n");
-		if (top_module_name.size() == 0) {
-			top_module_name = module->name.c_str();
-		}
-
-		if (check_label("pango")) {
-			run(stringf("hierarchy -check -top %s;;", top_module_name.c_str()));
-			MapperInit(module);
-			MapperMain(module);
-		}
-		if (check_label("check")) {
-			run("check -mapped");
-		}
-		if (check_label("verilog")) {
-			run(stringf("write_verilog -noexpr -noattr %s_syn.v", top_module_name.c_str() + 1));
-		}
-		if (check_label("score")) {
-			run(stringf("score -before %s -after %s_syn.v", input_verilog_file.c_str(), top_module_name.c_str() + 1));
-		}
-	}
-} SynthPangoPass;
-PRIVATE_NAMESPACE_END
+YOSYS_NAMESPACE_END
