@@ -1,0 +1,7 @@
+[submodule "abc"]
+	path = abc
+	url = https://gitee.com/g18406550402/abc
+# Don't use paths as names to avoid git archive problems
+[submodule "cxxopts"]
+	path = libs/cxxopts
+	url = https://gitee.com/createrjd/cxxopts

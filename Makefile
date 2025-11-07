@@ -1,17 +1,17 @@
 
-CONFIG := none
-# CONFIG := clang
+# CONFIG := none
+CONFIG := clang
 # CONFIG := gcc
 # CONFIG := wasi
 # CONFIG := msys2-32
 # CONFIG := msys2-64
 
 # features (the more the better)
-ENABLE_TCL := 1
+ENABLE_TCL := 0
 ENABLE_ABC := 0
 ENABLE_GLOB := 1
-ENABLE_PLUGINS := 1
-ENABLE_READLINE := 1
+ENABLE_PLUGINS := 0
+ENABLE_READLINE := 0
 ENABLE_EDITLINE := 0
 ENABLE_GHDL := 0
 ENABLE_VERIFIC := 0
@@ -21,7 +21,7 @@ ENABLE_VERIFIC_HIER_TREE := 1
 ENABLE_VERIFIC_YOSYSHQ_EXTENSIONS := 0
 ENABLE_VERIFIC_EDIF := 0
 ENABLE_VERIFIC_LIBERTY := 0
-ENABLE_COVER := 1
+ENABLE_COVER := 0
 ENABLE_LIBYOSYS := 0
 ENABLE_ZLIB := 1
 
@@ -111,7 +111,8 @@ endif
 
 PKG_CONFIG ?= pkg-config
 SED ?= sed
-BISON ?= bison
+# BISON ?= bison
+BISON := $(HOME)/local/bin/bison
 STRIP ?= strip
 AWK ?= awk
 
