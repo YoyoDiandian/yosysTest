@@ -119,8 +119,8 @@ struct SynthPangoPass : public ScriptPass {
 #if defined(_WIN32)
 			run("read_verilog -lib ./techlibs/pango/pango_lib.v");
 #else
-			// run("read_verilog -lib +/pango/pango_lib.v");
-			run("read_verilog -lib ./pango_lib.v");
+			run("read_verilog -lib +/pango/pango_lib.v");
+			// run("read_verilog -lib ./pango_lib.v");
 #endif
 			run(stringf("read_verilog -icells %s", input_verilog_file.c_str()));
 			if (top_module_name.size() > 0) {
@@ -148,10 +148,10 @@ struct SynthPangoPass : public ScriptPass {
 			run("check -mapped");
 		}
 		if (check_label("verilog")) {
-			run(stringf("write_verilog -noexpr -noattr %s_syn.v", top_module_name.c_str() + 1));
+			run(stringf("write_verilog -noexpr -noattr +/../techlibs/pango/outputs/%s_syn.v", top_module_name.c_str() + 1));
 		}
 		if (check_label("score")) {
-			run(stringf("score -before %s -after %s_syn.v", input_verilog_file.c_str(), top_module_name.c_str() + 1));
+			run(stringf("score -before %s -after %s_syn.v -out +/../techlibs/pango/outputs/%s_score.txt", input_verilog_file.c_str(), top_module_name.c_str() + 1, top_module_name.c_str() + 1));
 		}
 	}
 } SynthPangoPass;
